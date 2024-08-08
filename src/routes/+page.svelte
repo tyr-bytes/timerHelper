@@ -7,9 +7,9 @@
 			<h1 class="text-3xl font-bold tracking-tight sm:text-4xl text-primary">
 				Welcome to TimeTracker
 			</h1>
-			<p class="text-muted-foreground text-lg">
+			<div class="text-muted-foreground text-lg">
 				Discover the power of our innovative time tracking solution and transform the way you work.
-			</p>
+			</div>
 			<ul class="list-disc list-inside text-muted-foreground space-y-2">
 				<li>Effortlessly track your time</li>
 				<li>Generate insightful reports</li>

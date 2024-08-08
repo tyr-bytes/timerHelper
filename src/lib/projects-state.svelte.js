@@ -8,6 +8,18 @@ export class ProjectStore {
     projects = $state([]);
     activeTimerId = $state(null);
 
+    /**
+     * @type {number}
+     */
+    // totalTime = $derived.by(() => {
+    //     let total = 0;
+    //     for (const n of projects) {
+    //         total += n.timeSpent;
+    //     }
+    //     return total;
+
+    // });
+
     constructor() {
         this.loadProjects();
     }
@@ -56,7 +68,6 @@ export class ProjectStore {
         const project = this.projects.find(p => p.id === id);
         return project ? project.timespent : 0;
     }
-
 
 }
 

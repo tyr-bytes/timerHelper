@@ -6,6 +6,12 @@ import globals from 'globals';
 /** @type {import('eslint').Linter.Config[]} */
 export default [
 	js.configs.recommended,
+	{
+		files: ["**/*.svelte", "*.svelte"],
+		languageOptions: {
+			parser: svelteParser,
+		},
+	},
 	...svelte.configs['flat/recommended'],
 	prettier,
 	...svelte.configs['flat/prettier'],

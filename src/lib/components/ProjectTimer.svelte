@@ -3,7 +3,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { human_readable_from_seconds } from '$lib/util';
 
-	let { projectId, timeSpent = $bindable(), isActive = $bindable(), onToggle } = $props();
+	let { project = $bindable(), onDelete, isActive } = $props();
 
 	/**
 	 * @type {Timer}
@@ -13,13 +13,13 @@
 	onMount(() => {
 		timer = new Timer(
 			(/** @type {any} */ delta, /** @type {unknown} */ total) => {
-				timeSpent = total; // This updates the parent's value
+				project.timespent = total; // This updates the parent's value
 			},
 			(/** @type {unknown} */ running) => {
 				isActive = running; // This updates the parent's value
 			}
 		);
-		timer.totalElapsedTime = timeSpent;
+		timer.totalElapsedTime = project.timespent;
 	});
 
 	onDestroy(() => {
@@ -27,7 +27,7 @@
 	});
 
 	function toggleTimer() {
-		onToggle();
+		// onToggle();
 		timer.toggle();
 	}
 
@@ -37,12 +37,11 @@
 
 	function reset() {
 		timer.reset();
-		timeSpent = 0; // This updates the parent's value
+		// timeSpent = 0; // This updates the parent's value
 	}
 
 	function deleteProject() {
-		// Implement delete logic here
-		console.log('Delete project', projectId);
+		onDelete(project.id);
 	}
 
 	$effect(() => {
@@ -57,7 +56,7 @@
 </script>
 
 <div class="flex items-center space-x-3">
-	<div class="w-24 text-sm">{human_readable_from_seconds(timeSpent)}</div>
+	<div class="w-24 text-sm">{human_readable_from_seconds(project.timespent)}</div>
 	<!-- Play/Pause Button -->
 	<button
 		onclick={toggleTimer}
